@@ -7,8 +7,8 @@ import Img3 from "../../assets/Img/product-03-3.webp";
 import Img4 from "../../assets/Img/product-06-1.webp";
 // import Img2_2 from "../../assets/Img/product-12-2.webp";
 
-const FeaturedProducts = () => {
-  const products = [
+let FeaturedProducts = () => {
+  let products = [
     {
       id: 1,
       title: "Scalp Moisturizing Cream",

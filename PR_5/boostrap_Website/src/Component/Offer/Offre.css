@@ -1,0 +1,21 @@
+.offerItem{
+    background-image: url("../../assets/Img/banner-01.webp");
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    overflow: hidden;
+}
+.offerItem2{
+    background-image: url("../../assets/Img/banner-02.webp");
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    overflow: hidden;
+}
+
+.offerItem h1{
+    max-width: 400px;
+}
+.offerItem2 h6{
+    max-width: 290px;
+}
