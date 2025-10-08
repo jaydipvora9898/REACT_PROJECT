@@ -36,7 +36,6 @@ const More = () => {
               <Card.Title className="fw-medium">From Our Blog</Card.Title>
               <Button variant="white" href="#blog" className="mt-3 fw-medium">
                 Read More &nbsp;
-
                 <FaArrowRightLong />
               </Button>
             </Card.Body>
