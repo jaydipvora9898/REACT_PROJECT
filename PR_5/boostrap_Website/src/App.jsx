@@ -8,6 +8,9 @@ import './Component/Offer/Offre.css'
 import ServicesComponent from '../src/Component/Services/Services';
 import SeenComponent from '../src/Component/Seen/Seen';
 import './Component/Seen/Seen.css'
+import Customer from './Component/Customer/Customer';
+import More from './Component/More/More';
+import './Component/More/More.css'
 
 function App() {
 
@@ -18,6 +21,8 @@ function App() {
       <Offer />
       <ServicesComponent />
       <SeenComponent />
+      <Customer />
+      <More />
     </>
   )
 }
