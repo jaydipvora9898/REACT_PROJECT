@@ -1,11 +1,15 @@
 import { Container, Row, Col, Card, Badge } from "react-bootstrap";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Img1 from "../../assets/Img/product-11-1.webp";
-import Img1_2 from "../../assets/Img/product-11-2.webp";
+import hoverImage1 from "../../assets/Img/product-11-2.webp";
+import hoverImage2 from "../../assets/Img/product-05-2.jpg";
+import hoverImage3 from "../../assets/Img/product-03-1.webp";
+import hoverImage4 from "../../assets/Img/product-06-2.webp";
 import Img2 from "../../assets/Img/product-05-1.webp";
 import Img3 from "../../assets/Img/product-03-3.webp";
 import Img4 from "../../assets/Img/product-06-1.webp";
-// import Img2_2 from "../../assets/Img/product-12-2.webp";
+import "./product.css";
 
 let FeaturedProducts = () => {
   let products = [
@@ -14,6 +18,7 @@ let FeaturedProducts = () => {
       title: "Scalp Moisturizing Cream",
       price: "$29.00",
       img: Img1,
+      hoverImg: hoverImage1,
       tag: null,
     },
     {
@@ -22,6 +27,7 @@ let FeaturedProducts = () => {
       price: "$25.00",
       oldPrice: "$85.00",
       img: Img2,
+      hoverImg: hoverImage2, 
       tag: "Sale",
       tagColor: "success",
     },
@@ -30,6 +36,7 @@ let FeaturedProducts = () => {
       title: "Enriched Hand & Body Wash",
       price: "$23.00",
       img: Img3,
+      hoverImg: hoverImage3, 
       tag: "New",
       tagColor: "danger",
     },
@@ -38,10 +45,12 @@ let FeaturedProducts = () => {
       title: "Enriched Duo",
       price: "$27.00",
       img: Img4,
+      hoverImg: hoverImage4, 
       tag: null,
     },
   ];
 
+  const [hoveredProduct, setHoveredProduct] = useState(null);
 
   return (
     <Container className="text-center my-5">
@@ -55,8 +64,11 @@ let FeaturedProducts = () => {
               <div className="position-relative">
                 <Card.Img
                   variant="top"
-                  src={product.img}
+                  src={hoveredProduct === product.id ? product.hoverImg : product.img}
+                  onMouseEnter={() => setHoveredProduct(product.id)}
+                  onMouseLeave={() => setHoveredProduct(null)}
                   alt={product.title}
+                  className="hover-image"
                 />
                 {product.tag && (
                   <Badge

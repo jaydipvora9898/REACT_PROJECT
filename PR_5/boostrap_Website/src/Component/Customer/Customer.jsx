@@ -54,10 +54,10 @@ const products = [
 ];
 const Customer = () => {
   return (
-    <Container fluid className="customer-section">
+    <Container className="customer-section">
       <h1 className="text-center">Customer favorite beauty essentials</h1>
       <p className="text-center fs-5 mt-4 mb-5">Made using clean, non-toxic ingredients, our products are designed for everyone.</p>
-      <Row className="align-items-center">
+      <Row>
         <Col md={5} className="text-center image-text-section">
           <img
             src={Img7}
