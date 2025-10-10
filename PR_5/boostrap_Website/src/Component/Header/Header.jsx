@@ -1,6 +1,5 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { BsSearch, BsPerson, BsStar, BsBag } from 'react-icons/bs';
 import './header.css';
 const Header = () => {
@@ -10,15 +9,21 @@ const Header = () => {
           <Nav.Link href="#" className="nav-link-home mx-4">HOME</Nav.Link>
           <Nav.Link href="#" className="nav-link-home me-4">SHOP</Nav.Link>
           <Nav.Link href="#" className="nav-link-home me-4">PRODUCT</Nav.Link>
-          <NavDropdown title="PAGES" id="pages-dropdown" className="nav-dropdown-item me-4">
-            <NavDropdown.Item href="#">ABOUT US</NavDropdown.Item>
-            <NavDropdown.Item href="#">CONTACT US</NavDropdown.Item>
-            <NavDropdown.Item href="#">FAQ</NavDropdown.Item>
-          </NavDropdown>
-          <NavDropdown title="BLOG" id="blog-dropdown" className="nav-dropdown-item">
-            <NavDropdown.Item href="#">Left Sidebar</NavDropdown.Item>
-            <NavDropdown.Item href="#">Blog Post</NavDropdown.Item>
-          </NavDropdown>
+          <div className="nav-dropdown-item me-4">
+            <span className="nav-link dropdown-toggle">PAGES</span>
+            <div className="dropdown-menu">
+              <a className="dropdown-item" href="#">ABOUT US</a>
+              <a className="dropdown-item" href="#">CONTACT US</a>
+              <a className="dropdown-item" href="#">FAQ</a>
+            </div>
+          </div>
+          <div className="nav-dropdown-item">
+            <span className="nav-link dropdown-toggle">BLOG</span>
+            <div className="dropdown-menu">
+              <a className="dropdown-item" href="#">Left Sidebar</a>
+              <a className="dropdown-item" href="#">Blog Post</a>
+            </div>
+          </div>
         </Nav>
         <Navbar.Brand href="#" className="mx-auto brand-logo">
           GLOWING

@@ -11,6 +11,7 @@ import Customer from "./Component/Customer/Customer";
 import More from "./Component/More/More";
 import "./Component/More/More.css";
 import BasicExample from "./Component/Header/Header";
+import Footer from "./Component/Footer/Footer";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <SeenComponent />
       <Customer />
       <More />
+      <Footer />
     </>
   );
 }

@@ -1,27 +1,57 @@
-.hover-image {
-  transition: all 0.5s ease-in-out;
-}
-
-.card {
+.product-card {
+  position: relative;
   overflow: hidden;
   transition: transform 0.3s ease;
 }
 
-
-.card-body {
-  transition: all 0.5s ease;
+.product-card:hover {
+  transform: translateY(-5px);
 }
 
-
-.card:hover .hover-image {
-  transform: scale(1.05);
+.hover-image {
+  transition: transform 0.5s ease-in-out;
 }
 
-.btn {
-  transition: all 0.3s ease;
+.product-card:hover .hover-image {
+  transform: scale(1.1);
+}
+
+.hover-overlay {
+  bottom: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.hover-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hover-overlay .btn {
+  transform: translateY(20%);
+  opacity: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background-color: #fff;
+  color: #000;
+  transition: all 0.4s ease-in-out;
+}
+
+.hover-overlay .btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.hover-overlay.show .btn {
+  transform: translateY(10%);
+  opacity: 1;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }

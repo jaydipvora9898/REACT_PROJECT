@@ -10,9 +10,10 @@ import Img2 from "../../assets/Img/product-05-1.webp";
 import Img3 from "../../assets/Img/product-03-3.webp";
 import Img4 from "../../assets/Img/product-06-1.webp";
 import "./product.css";
+import { BsEye, BsCart, BsHeart, BsChatDots } from "react-icons/bs";
 
-let FeaturedProducts = () => {
-  let products = [
+const FeaturedProducts = () => {
+  const products = [
     {
       id: 1,
       title: "Scalp Moisturizing Cream",
@@ -27,7 +28,7 @@ let FeaturedProducts = () => {
       price: "$25.00",
       oldPrice: "$85.00",
       img: Img2,
-      hoverImg: hoverImage2, 
+      hoverImg: hoverImage2,
       tag: "Sale",
       tagColor: "success",
     },
@@ -36,7 +37,7 @@ let FeaturedProducts = () => {
       title: "Enriched Hand & Body Wash",
       price: "$23.00",
       img: Img3,
-      hoverImg: hoverImage3, 
+      hoverImg: hoverImage3,
       tag: "New",
       tagColor: "danger",
     },
@@ -45,7 +46,7 @@ let FeaturedProducts = () => {
       title: "Enriched Duo",
       price: "$27.00",
       img: Img4,
-      hoverImg: hoverImage4, 
+      hoverImg: hoverImage4,
       tag: null,
     },
   ];
@@ -60,16 +61,23 @@ let FeaturedProducts = () => {
       <Row className="justify-content-center">
         {products.map((product) => (
           <Col key={product.id} xs={12} sm={6} md={3} className="mb-4">
-            <Card className="border-0">
-              <div className="position-relative">
+            <Card
+              className="border-0 product-card"
+              onMouseEnter={() => setHoveredProduct(product.id)}
+              onMouseLeave={() => setHoveredProduct(null)}
+            >
+              <div className="position-relative overflow-hidden">
                 <Card.Img
                   variant="top"
-                  src={hoveredProduct === product.id ? product.hoverImg : product.img}
-                  onMouseEnter={() => setHoveredProduct(product.id)}
-                  onMouseLeave={() => setHoveredProduct(null)}
+                  src={
+                    hoveredProduct === product.id
+                      ? product.hoverImg
+                      : product.img
+                  }
                   alt={product.title}
-                  className="hover-image"
+                  className="hover-image w-100"
                 />
+
                 {product.tag && (
                   <Badge
                     bg={product.tagColor || "danger"}
@@ -78,7 +86,29 @@ let FeaturedProducts = () => {
                     {product.tag}
                   </Badge>
                 )}
+
+                <div
+                  className={`hover-overlay d-flex flex-column justify-content-center align-items-center ${
+                    hoveredProduct === product.id ? "show" : ""
+                  }`}
+                >
+                  <div className="d-flex  align-items-center btn-class gap-3">
+                    <button className="btn btn-dark gap-2">
+                      <BsCart size={20} />
+                    </button>
+                    <button className="btn btn-outline-light gap-2">
+                      <BsEye size={20} />
+                    </button>
+                    <button className="btn btn-dark gap-2">
+                      <BsHeart size={20} />
+                    </button>
+                    <button className="btn btn-outline-light gap-2">
+                      <BsChatDots size={20} />
+                    </button>
+                  </div>
+                </div>
               </div>
+
               <Card.Body>
                 <div className="d-flex justify-content-center align-items-center gap-2">
                   {product.oldPrice && (
