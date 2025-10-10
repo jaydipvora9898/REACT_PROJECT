@@ -93,16 +93,16 @@ const FeaturedProducts = () => {
                   }`}
                 >
                   <div className="d-flex  align-items-center btn-class gap-3">
-                    <button className="btn btn-dark gap-2">
+                    <button className="btn btn-dark gap-2 button1">
                       <BsCart size={20} />
                     </button>
-                    <button className="btn btn-outline-light gap-2">
+                    <button className="btn btn-outline-light gap-2 button2">
                       <BsEye size={20} />
                     </button>
-                    <button className="btn btn-dark gap-2">
+                    <button className="btn btn-dark gap-2 button3">
                       <BsHeart size={20} />
                     </button>
-                    <button className="btn btn-outline-light gap-2">
+                    <button className="btn btn-outline-light gap-2 button4">
                       <BsChatDots size={20} />
                     </button>
                   </div>

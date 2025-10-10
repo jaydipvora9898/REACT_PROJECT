@@ -33,3 +33,6 @@
     max-width: 500px;
     color: #7e7e7e;
 }
+.carousel-caption button:hover{
+    background-color: #4E7661;
+}

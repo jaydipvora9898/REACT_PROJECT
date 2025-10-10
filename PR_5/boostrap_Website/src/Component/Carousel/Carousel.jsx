@@ -35,7 +35,7 @@ function CarouselComponent() {
             <h6 className='fw-medium'>{item.title}</h6>
             <h1 className="display-4 fw-medium mt-4">{item.heading}</h1>
             <p className="fs-5 mt-4">Made using clean, non-toxic ingredients,our products are designed for everyone</p>
-            <button className="btn btn-dark mt-3 px-4 py-2">Shop Now</button>
+            <button className="btn btn-dark mt-3 px-4 py-2 border-0 fs-5">Shop Now</button>
           </Carousel.Caption>
         </Carousel.Item>
       ))}

@@ -13,6 +13,12 @@
   max-width: 600px;
   margin: 0 auto;
 }
+.hover-img {
+  transition: transform 0.3s ease-in-out;
+}
+.hover-img:hover {
+  transform: scale(1.05);
+}
 .section-subtitle {
   font-size: 1rem;
   color: #666;

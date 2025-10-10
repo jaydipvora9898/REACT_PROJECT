@@ -12,10 +12,23 @@
     height: 400px;
     overflow: hidden;
 }
-
+.offerItem:hover{
+    transform: scale(1.05);
+    transition: all 0.6s ease-in-out;
+    overflow: hidden;
+}
+.offerItem2:hover{
+    transform: scale(1.05);
+    transition: all 0.6s ease-in-out;
+    overflow: hidden;
+}
 .offerItem h1{
     max-width: 400px;
 }
 .offerItem2 h6{
     max-width: 290px;
+}
+.button:hover{
+    background-color: #4E7661;
+    color: #fff!important;
 }
