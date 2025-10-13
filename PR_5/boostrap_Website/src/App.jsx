@@ -10,13 +10,13 @@ import "./Component/Seen/Seen.css";
 import Customer from "./Component/Customer/Customer";
 import More from "./Component/More/More";
 import "./Component/More/More.css";
-import BasicExample from "./Component/Header/Header";
 import Footer from "./Component/Footer/Footer";
+import Header from "./Component/Header/Header";
 
 function App() {
   return (
     <>
-      <BasicExample />
+      <Header />
       <CarouselComponent />
       <FeaturedProducts />
       <Offer />

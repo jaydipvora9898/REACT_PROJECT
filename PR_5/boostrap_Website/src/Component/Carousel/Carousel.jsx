@@ -23,7 +23,7 @@ let carouselItems = [
 ]
 function CarouselComponent() {
   return (
-    <Carousel data-bs-theme="dark">
+    <Carousel data-bs-theme="dark" className='mt-5'>
       {carouselItems.map((item, index) => (
         <Carousel.Item className="height-700" key={index}>
           <img
