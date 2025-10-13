@@ -11,7 +11,7 @@ import Customer from "./Component/Customer/Customer";
 import More from "./Component/More/More";
 import "./Component/More/More.css";
 import Footer from "./Component/Footer/Footer";
-import Header from "./Component/Header/Header";
+import Header from "./Component/Header/Header";   
 
 function App() {
   return (
