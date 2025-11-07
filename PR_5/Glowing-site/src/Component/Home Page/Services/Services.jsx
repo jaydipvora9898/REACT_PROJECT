@@ -1,11 +1,10 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import './Services.css';
 import Card from 'react-bootstrap/Card';
-import Image1 from '../../assets/Img/icon-box-01.svg';
-import Image2 from '../../assets/Img/icon-box-02.svg';
-import Image3 from '../../assets/Img/icon-box-03.svg';
-
-import Image4 from '../../assets/Img/icon-box-04.svg';
+import Image1 from '../../../assets/Home image/icon-box-01.svg';
+import Image2 from '../../../assets/Home image/icon-box-02.svg';
+import Image3 from '../../../assets/Home image/icon-box-03.svg';
+import Image4 from '../../../assets/Home image/icon-box-04.svg';
 
 let servicesItems = [
   {
