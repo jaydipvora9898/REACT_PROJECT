@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
-export default function MovieForm({ initialData, onSubmit, submitLabel = "Save" }) {
+export default function MovieForm({
+  initialData,
+  onSubmit,
+  submitLabel = "Save",
+}) {
   const [form, setForm] = useState({
     title: "",
     genre: "",
@@ -12,7 +16,7 @@ export default function MovieForm({ initialData, onSubmit, submitLabel = "Save" 
 
   useEffect(() => {
     if (initialData) {
-      setForm({
+      form({
         title: initialData.title || "",
         genre: initialData.genre || "",
         year: initialData.year || "",

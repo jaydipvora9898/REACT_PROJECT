@@ -13,7 +13,9 @@ export default function Home() {
     const query = q.trim().toLowerCase();
     if (!query) return movies;
     return movies.filter((m) =>
-      [m.title, m.genre].filter(Boolean).some((f) => f.toLowerCase().includes(query))
+      [m.title, m.genre]
+        .filter(Boolean)
+        .some((f) => f.toLowerCase().includes(query))
     );
   }, [q, movies]);
 
@@ -21,13 +23,18 @@ export default function Home() {
   const startIndex = (currentPage - 1) * PAGE_SIZE;
   const pageItems = filtered.slice(startIndex, startIndex + PAGE_SIZE);
 
+  // reset page on search
   useEffect(() => {
     setCurrentPage(1);
   }, [q]);
 
   useEffect(() => {
-    if (currentPage > totalPages) setCurrentPage(totalPages);
-  }, [totalPages]);
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    } else if (currentPage < 1) {
+      setCurrentPage(1);
+    }
+  }, [totalPages, currentPage]);
 
   return (
     <div className="space-y-6">

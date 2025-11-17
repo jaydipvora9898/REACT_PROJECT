@@ -10,7 +10,7 @@ export default function EditMovie() {
 
   function handleSubmit(payload) {
     updateMovie(id, payload);
-    navigate(`/movie/${id}`);
+    navigate(`/${id}`);
   }
 
   if (!movie) {

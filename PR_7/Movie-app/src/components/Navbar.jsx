@@ -11,7 +11,9 @@ export default function Navbar() {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `bg-white/50 hover:bg-white text-black px-3 py-1.5 rounded-md transition-colors ${isActive ? "font-semibold" : ""}`
+              `bg-white/50 hover:bg-white text-black px-3 py-1.5 rounded-md transition-colors ${
+                isActive ? "font-semibold" : ""
+              }`
             }
           >
             Home

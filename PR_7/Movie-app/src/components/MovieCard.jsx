@@ -29,7 +29,9 @@ export default function MovieCard({ movie, onDelete }) {
             </span>
           )}
         </div>
-        <p className="text-sm text-slate-300 line-clamp-2">{movie.description}</p>
+        <p className="text-sm text-slate-300 line-clamp-2">
+          {movie.description}
+        </p>
         <div className="flex items-center gap-2 pt-2">
           <Link
             to={`/movie/${movie.id}`}
