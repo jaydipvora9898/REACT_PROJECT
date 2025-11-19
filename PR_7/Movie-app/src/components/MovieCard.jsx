@@ -6,7 +6,7 @@ export default function MovieCard({ movie, onDelete }) {
     <div className="group relative rounded-2xl overflow-hidden bg-slate-800/50 border border-slate-700 backdrop-blur-sm shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl hover:border-indigo-500">
       {/* shimmer beam */}
       <span className="pointer-events-none absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 animate-none group-hover:animate-shine" />
-      <div className="aspect-[3/4] w-full bg-slate-700">
+      <div className="aspect-3/4 w-full bg-slate-700">
         {poster ? (
           <img
             src={poster}
