@@ -5,6 +5,7 @@ import Slider2 from './Slider/Slider-2';
 import Slider3 from './Slider/Slider-3';
 import Slider4 from './Slider/Slider-4';
 import Slider5 from './Slider/Slider-5';
+import Shop from './Shop/Shop';
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <Slider3 />
       <Slider4 />
       <Slider5 />
+      <Shop />
     </>
   )
 }
