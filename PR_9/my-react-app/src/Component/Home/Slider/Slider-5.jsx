@@ -13,18 +13,18 @@ import sliderImg11 from "../../../assets/Img/Slider-5/img-11.webp";
 import sliderImg12 from "../../../assets/Img/Slider-5/img-12.webp";
 import { useMemo, useState, useEffect } from "react";
 const slider3img = [
-  { id: 1, img: sliderImg1 },
-  { id: 2, img: sliderImg2 },
-  { id: 3, img: sliderImg3 },
-  { id: 4, img: sliderImg4 },
-  { id: 5, img: sliderImg5 },
-  { id: 6, img: sliderImg6 },
-  { id: 7, img: sliderImg7 },
-  { id: 8, img: sliderImg8 },
-  { id: 9, img: sliderImg9 },
-  { id: 10, img: sliderImg10 },
-  { id: 11, img: sliderImg11 },
-  { id: 12, img: sliderImg12 }
+  { id: 1, img: sliderImg1, href: "/Women" },
+  { id: 2, img: sliderImg2, href: "/Women" },
+  { id: 3, img: sliderImg3, href: "/Men" },
+  { id: 4, img: sliderImg4, href: "/Men" },
+  { id: 5, img: sliderImg5, href: "/Men" },
+  { id: 6, img: sliderImg6, href: "/Men" },
+  { id: 7, img: sliderImg7, href: "/Men" },
+  { id: 8, img: sliderImg8, href: "/Men" },
+  { id: 9, img: sliderImg9, href: "/Men" },
+  { id: 10, img: sliderImg10, href: "/Men" },
+  { id: 11, img: sliderImg11, href: "/Men" },
+  { id: 12, img: sliderImg12, href: "/Men" }
 ];
 const Slider4 = () => {
   const slides = useMemo(() => {

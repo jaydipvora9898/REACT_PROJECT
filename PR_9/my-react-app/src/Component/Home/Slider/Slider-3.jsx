@@ -19,24 +19,24 @@ import sliderImg17 from "../../../assets/Img/Slider-3/img-17.webp";
 import sliderImg18 from "../../../assets/Img/Slider-3/img-18.webp";
 import { useMemo, useState, useEffect } from "react";
 const slider3img = [
-  { id: 1, img: sliderImg1 },
-  { id: 2, img: sliderImg2 },
-  { id: 3, img: sliderImg3 },
-  { id: 4, img: sliderImg4 },
-  { id: 5, img: sliderImg5 },
-  { id: 6, img: sliderImg6 },
-  { id: 7, img: sliderImg7 },
-  { id: 8, img: sliderImg8 },
-  { id: 9, img: sliderImg9 },
-  { id: 10, img: sliderImg10 },
-  { id: 11, img: sliderImg11 },
-  { id: 12, img: sliderImg12 },
-  { id: 13, img: sliderImg13 },
-  { id: 14, img: sliderImg14 },
-  { id: 15, img: sliderImg15 },
-  { id: 16, img: sliderImg16 },
-  { id: 17, img: sliderImg17 },
-  { id: 18, img: sliderImg18 },
+  { id: 1, img: sliderImg1, href: "/Men" },
+  { id: 2, img: sliderImg2, href: "/Women" },
+  { id: 3, img: sliderImg3, href: "/Men" },
+  { id: 4, img: sliderImg4, href: "/Men" },
+  { id: 5, img: sliderImg5, href: "/Men" },
+  { id: 6, img: sliderImg6, href: "/Men" },
+  { id: 7, img: sliderImg7, href: "/Women" },
+  { id: 8, img: sliderImg8, href: "/Women" },
+  { id: 9, img: sliderImg9, href: "/Women" },
+  { id: 10, img: sliderImg10, href: "/Women" },
+  { id: 11, img: sliderImg11, href: "/Women" },
+  { id: 12, img: sliderImg12, href: "/Women" },
+  { id: 13, img: sliderImg13, href: "/Women" },
+  { id: 14, img: sliderImg14, href: "/Women" },
+  { id: 15, img: sliderImg15, href: "/Men" },
+  { id: 16, img: sliderImg16, href: "/Men" },
+  { id: 17, img: sliderImg17, href: "/Men" },
+  { id: 18, img: sliderImg18, href: "/Men" },
 ];
 const Slider3 = () => {
   const slides = useMemo(() => {
@@ -80,7 +80,7 @@ const Slider3 = () => {
                         key={product.id}
                         className="group relative overflow-hidden"
                       >
-                        <a href="#">
+                        <a href={product.href}>
                           <img
                             alt={`slide-${idx}-product-${product.id}`}
                             src={product.img}

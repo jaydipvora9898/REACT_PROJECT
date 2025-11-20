@@ -51,14 +51,17 @@ const AudienceProducts = ({ audience }) => {
                     <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200" />
                   )}
                 </div>
-                <div className="p-4">
+                <div className="p-4 relative">
+                  <div className="bg-white/90 text-[#030b59] px-3 py-1 rounded-[2px] text-sm font-medium inline-block absolute top-[-32px] left-2">
+                    {item.rating || "0"} ⭐
+                  </div>
                   <div>
                     <h3 className="text-slate-900 font-semibold">
                       {item.title}
                     </h3>
                     {typeof item.price === "number" &&
                       !Number.isNaN(item.price) && (
-                        <span className="font-bold uppercase text-indigo-700 py-1 inline-block rounded-md">
+                        <span className="font-bold text-2xl text-[#050d66] py-1.5 inline-block rounded-md">
                           ₹{item.price.toFixed(2)}
                         </span>
                       )}

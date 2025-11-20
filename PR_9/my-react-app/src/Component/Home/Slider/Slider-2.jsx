@@ -15,22 +15,23 @@ import sliderImg13 from "../../../assets/Img/Slider-2/img-13.webp";
 import sliderImg14 from "../../../assets/Img/Slider-2/img-14.webp";
 import sliderImg15 from "../../../assets/Img/Slider-2/img-15.webp";
 import { useMemo, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 const slider2img = [
-  { id: 1, img: sliderImg1 },
-  { id: 2, img: sliderImg2 },
-  { id: 3, img: sliderImg3 },
-  { id: 4, img: sliderImg4 },
-  { id: 5, img: sliderImg5 },
-  { id: 6, img: sliderImg6 },
-  { id: 7, img: sliderImg7 },
-  { id: 8, img: sliderImg8 },
-  { id: 9, img: sliderImg9 },
-  { id: 10, img: sliderImg10 },
-  { id: 11, img: sliderImg11 },
-  { id: 12, img: sliderImg12 },
-  { id: 13, img: sliderImg13 },
-  { id: 14, img: sliderImg14 },
-  { id: 15, img: sliderImg15 },
+  { id: 1, img: sliderImg1, href: "/men" },
+  { id: 2, img: sliderImg2, href: "/women" },
+  { id: 3, img: sliderImg3, href: "/women" },
+  { id: 4, img: sliderImg4, href: "/men" },
+  { id: 5, img: sliderImg5, href: "/women" },
+  { id: 6, img: sliderImg6, href: "/men" },
+  { id: 7, img: sliderImg7, href: "/men" },
+  { id: 8, img: sliderImg8, href: "/men" },
+  { id: 9, img: sliderImg9, href: "/women" },
+  { id: 10, img: sliderImg10, href: "/women" },
+  { id: 11, img: sliderImg11, href: "/kids" },
+  { id: 12, img: sliderImg12, href: "/kids" },
+  { id: 13, img: sliderImg13, href: "/men" },
+  { id: 14, img: sliderImg14, href: "/women" },
+  { id: 15, img: sliderImg15, href: "/men" },
 ];
 const Slider2 = () => {
   const slides = useMemo(() => {
@@ -74,13 +75,13 @@ const Slider2 = () => {
                         key={product.id}
                         className="group relative overflow-hidden"
                       >
-                        <a href="#">
+                        <Link to={product.href}>
                           <img
                             alt={`slide-${idx}-product-${product.id}`}
                             src={product.img}
                             className="aspect-square w-full object-contain h-[400px] transition-transform duration-300 group-hover:scale-105"
                           />
-                        </a>
+                        </Link>
                       </div>
                     ))}
                   </div>

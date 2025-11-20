@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
-const categories = [
+const manCategories = [
   "Backpacks",
   "Briefs",
   "Co-Ords",
@@ -20,6 +20,122 @@ const categories = [
   "Thermal Sets",
   "Other",
 ];
+const womenCategories = [
+  "Ballerinas",
+  "Boots",
+  "Casual Shoes",
+  "Co-Ords",
+  "Clutches",
+  "Coats",
+  "Dresses",
+  "Flats",
+  "Handbags",
+  "Heels",
+  "Jeans",
+  "Jackets",
+  "Jeggings",
+  "Sweatshirts",
+  "Shirts",
+  "Sweaters",
+  "Skirts",
+  "Tops",
+  "Tshirts",
+  "Trousers",
+  "Track Pants",
+  "Trunks",
+  "Thermal Sets",
+  "Other",
+]
+const kidsCategories = [
+  "Bodysuit",
+  "Briefs",
+  "Backpacks",
+  "Blazers",
+  "Blankets Quilts and Dohars",
+  "Bath Towels",
+  "Belts",
+  "Baby Gear & Nursery",
+  "Bra",
+  "Bedsheets",
+  "Boxers",
+  "Bath Rugs",
+  "Baby Apparel Gift Set",
+  "Bracelet",
+  "Bibs",
+  "Clothing Set",
+  "Caps",
+  "Cushion Covers",
+  "Curtains and Sheers",
+  "Cushions",
+  "Charms",
+  "Camisoles",
+  "Coats",
+  "Co-Ords",
+  "Dresses",
+  "Dungarees",
+  "Duvet Cover",
+  "Earrings",
+  "Festive Decor",
+  "Fruit and Vegetable Basket",
+  "Hair Accessory",
+  "Hat",
+  "Handbags",
+  "Headband",
+  "Hair Extension",
+  "Jeans",
+  "Jackets",
+  "Jeggings",
+  "Jumpsuit",
+  "Jewellery Set",
+  "Leggings",
+  "Lingerie Set",
+  "Lounge Shorts",
+  "Lounge Tshirts",
+  "Lounge Pants",
+  "Loofah Sponges and Brushes",
+  "Mittens",
+  "Messenger Bag",
+  "Mobile Accessories",
+  "Night suits",
+  "Necklace and Chains",
+  "Nightdress",
+  "Organisers","Pendant",
+  "Plates",
+  "Rompers",
+  "Robe",
+  "Ring",
+  "Sweatshirts",
+  "Shorts",
+  "Sweaters",
+  "Socks",
+  "Skirts",
+  "Shirts",
+  "Swimwear",
+  "Swim Bottoms",
+  "Sleepsuit",
+  "Sunglasses",
+  "Suits",
+  "Scarves",
+  "Stockings",
+  "Swim Tops",
+  "Shackets",
+  "Suspenders",
+  "Sandals",
+  "Tshirts",
+  "Tops",
+  "Trousers",
+  "Track Pants",
+  "Trunk",
+  "Tights",
+  "Ties",
+  "Travel Accessory",
+  "Tracksuits",
+  "Table Placemats",
+  "Waist Pouch",
+  "Wallets",
+  "Wall Shelves",
+  "Waistcoat"
+]
 const AddProduct = ({ onAdd }) => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -60,11 +176,23 @@ const AddProduct = ({ onAdd }) => {
     return next;
   };
 
-  // Tailwind UI utility classes
   const inputClasses =
     "w-full rounded-lg bg-white text-slate-900 border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500";
   const labelClasses = "block text-sm font-medium text-slate-700 mb-1";
 
+  // Derive categories based on selected audience
+  const categoriesForAudience = useMemo(() => {
+    if (form.audience === "Women") return womenCategories;
+    if (form.audience === "Kids") return kidsCategories;
+    return manCategories;
+  }, [form.audience]);
+
+  // Ensure selected category always exists for current audience
+  useEffect(() => {
+    if (!categoriesForAudience.includes(form.category)) {
+      setForm((prev) => ({ ...prev, category: "Other" }));
+    }
+  }, [categoriesForAudience]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,12 +220,10 @@ const AddProduct = ({ onAdd }) => {
     localStorage.setItem("products", JSON.stringify([product, ...existing]));
     if (typeof onAdd === "function") onAdd(product);
 
-    // Navigate to the audience-specific page after successful add
     const audiencePath = `/${(form.audience || "Men").toLowerCase()}`;
     setSuccess("Product added successfully");
     navigate(audiencePath);
 
-    // Reset form to defaults
     setForm({
       title: "",
       price: "",
@@ -141,50 +267,9 @@ const AddProduct = ({ onAdd }) => {
                 <p className="text-sm text-red-400 mt-1">{errors.title}</p>
               )}
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className={labelClasses}>
-                  Price
-                </label>
-                <input
-                  name="price"
-                  value={form.price}
-                  onChange={handleChange}
-                  type="number"
-                  step="0.01"
-                  className={inputClasses}
-                  placeholder="0.00"
-                />
-                {errors.price && (
-                  <p className="text-sm text-red-400 mt-1">{errors.price}</p>
-                )}
-              </div>
-
-              <div>
-                <label className={labelClasses}>
-                  Category
-                </label>
-                <select
-                  name="category"
-                  value={form.category}
-                  onChange={handleChange}
-                  className={inputClasses}
-                >
-                  <option value="">Select a category</option>
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
             {/* Audience (Men/Women/Kids) */}
             <div>
-              <span className={labelClasses}>
-                Audience
-              </span>
+              <span className={labelClasses}>Audience</span>
               <div className="flex items-center gap-3">
                 <label
                   className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
@@ -234,13 +319,95 @@ const AddProduct = ({ onAdd }) => {
                   />
                   <span>Kids</span>
                 </label>
+                <label
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
+                    form.audience === "Home"
+                      ? "border-indigo-600 bg-indigo-50 text-indigo-700"
+                      : "border-slate-300 text-slate-700"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="audience"
+                    value="Home"
+                    checked={form.audience === "Home"}
+                    onChange={handleChange}
+                  />
+                  <span>Home</span>
+                </label>
+                <label
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
+                    form.audience === "Beauty"
+                      ? "border-indigo-600 bg-indigo-50 text-indigo-700"
+                      : "border-slate-300 text-slate-700"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="audience"
+                    value="Beauty"
+                    checked={form.audience === "Beauty"}
+                    onChange={handleChange}
+                  />
+                  <span>Beauty</span>
+                </label>
+                <label
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
+                    form.audience === "Genz"
+                      ? "border-indigo-600 bg-indigo-50 text-indigo-700"
+                      : "border-slate-300 text-slate-700"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="audience"
+                    value="Genz"
+                    checked={form.audience === "Genz"}
+                    onChange={handleChange}
+                  />
+                  <span>Genz</span>
+                </label>
+                
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className={labelClasses}>
-                  Stock
-                </label>
+                <label className={labelClasses}>Price</label>
+                <input
+                  name="price"
+                  value={form.price}
+                  onChange={handleChange}
+                  type="number"
+                  step="0.01"
+                  className={inputClasses}
+                  placeholder="0.00"
+                />
+                {errors.price && (
+                  <p className="text-sm text-red-400 mt-1">{errors.price}</p>
+                )}
+              </div>
+
+              <div>
+                <label className={labelClasses}>Category</label>
+                <select
+                  name="category"
+                  value={form.category}
+                  onChange={handleChange}
+                  className={inputClasses}
+                >
+                  <option value="">Select a category</option>
+                  {categoriesForAudience.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClasses}>Stock</label>
                 <input
                   name="stock"
                   value={form.stock}
@@ -255,9 +422,7 @@ const AddProduct = ({ onAdd }) => {
               </div>
 
               <div>
-                <label className={labelClasses}>
-                  Rating (0–5)
-                </label>
+                <label className={labelClasses}>Rating (0–5)</label>
                 <input
                   name="rating"
                   value={form.rating}
@@ -276,9 +441,7 @@ const AddProduct = ({ onAdd }) => {
             </div>
 
             <div>
-              <label className={labelClasses}>
-                Image 1 URL
-              </label>
+              <label className={labelClasses}>Image 1 URL</label>
               <input
                 name="imageUrl1"
                 value={form.imageUrl1}
@@ -289,9 +452,7 @@ const AddProduct = ({ onAdd }) => {
               />
             </div>
             <div>
-              <label className={labelClasses}>
-                Image 2 URL
-              </label>
+              <label className={labelClasses}>Image 2 URL</label>
               <input
                 name="imageUrl2"
                 value={form.imageUrl2}
@@ -302,9 +463,7 @@ const AddProduct = ({ onAdd }) => {
               />
             </div>
             <div>
-              <label className={labelClasses}>
-                Image 3 URL
-              </label>
+              <label className={labelClasses}>Image 3 URL</label>
               <input
                 name="imageUrl3"
                 value={form.imageUrl3}
@@ -315,9 +474,7 @@ const AddProduct = ({ onAdd }) => {
               />
             </div>
             <div>
-              <label className={labelClasses}>
-                Image 4 URL
-              </label>
+              <label className={labelClasses}>Image 4 URL</label>
               <input
                 name="imageUrl4"
                 value={form.imageUrl4}
@@ -329,9 +486,7 @@ const AddProduct = ({ onAdd }) => {
             </div>
 
             <div>
-              <label className={labelClasses}>
-                Description
-              </label>
+              <label className={labelClasses}>Description</label>
               <textarea
                 name="description"
                 value={form.description}
