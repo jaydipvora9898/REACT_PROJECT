@@ -1,14 +1,38 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
+const categories = [
+  "Backpacks",
+  "Briefs",
+  "Co-Ords",
+  "Casual Shoes",
+  "Innerwear Vests",
+  "Jeans",
+  "Jackets",
+  "Shirts",
+  "Sweatshirts",
+  "Shorts",
+  "Sweaters",
+  "Tshirts",
+  "Trousers",
+  "Track Pants",
+  "Trunks",
+  "Thermal Sets",
+  "Other",
+];
 const AddProduct = ({ onAdd }) => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     title: "",
     price: "",
+    audience: "Men",
     category: "Other",
     stock: "",
     rating: "",
-    imageUrl: "",
+    imageUrl1: "",
+    imageUrl2: "",
+    imageUrl3: "",
+    imageUrl4: "",
     description: "",
   });
   const [errors, setErrors] = useState({});
@@ -36,75 +60,81 @@ const AddProduct = ({ onAdd }) => {
     return next;
   };
 
-  const product = {
-    id: crypto.randomUUID(),
-    title: form.title.trim(),
-    price: parseFloat(form.price),
-    category: form.category,
-    stock: parseInt(form.stock, 10),
-    rating: form.rating === "" ? null : parseFloat(form.rating),
-    imageUrl: form.imageUrl.trim(),
-    description: form.description.trim(),
-    createdAt: new Date().toISOString(),
-  };
+  // Tailwind UI utility classes
+  const inputClasses =
+    "w-full rounded-lg bg-white text-slate-900 border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500";
+  const labelClasses = "block text-sm font-medium text-slate-700 mb-1";
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const nextErrors = validate();
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
-    
+
     const product = {
       id: crypto.randomUUID(),
       title: form.title.trim(),
       price: parseFloat(form.price),
+      audience: form.audience,
       category: form.category,
       stock: parseInt(form.stock, 10),
       rating: form.rating === "" ? null : parseFloat(form.rating),
-      imageUrl: form.imageUrl.trim(),
+      imageUrl1: form.imageUrl1.trim(),
+      imageUrl2: form.imageUrl2.trim(),
+      imageUrl3: form.imageUrl3.trim(),
+      imageUrl4: form.imageUrl4.trim(),
       description: form.description.trim(),
       createdAt: new Date().toISOString(),
     };
-
 
     const existing = JSON.parse(localStorage.getItem("products") || "[]");
     localStorage.setItem("products", JSON.stringify([product, ...existing]));
     if (typeof onAdd === "function") onAdd(product);
 
+    // Navigate to the audience-specific page after successful add
+    const audiencePath = `/${(form.audience || "Men").toLowerCase()}`;
     setSuccess("Product added successfully");
+    navigate(audiencePath);
+
+    // Reset form to defaults
     setForm({
       title: "",
       price: "",
-      category: "",
+      audience: "Men",
+      category: "Other",
       stock: "",
       rating: "",
-      imageUrl: "",
+      imageUrl1: "",
+      imageUrl2: "",
+      imageUrl3: "",
+      imageUrl4: "",
       description: "",
     });
   };
 
   return (
-    <div className="min-h-[70vh] px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-sky-100 px-4 py-10">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold text-black text-center mb-4">
+        <h1 className="text-3xl font-bold text-center mb-6 bg-clip-text text-black bg-gradient-to-r">
           Add Product
         </h1>
-        <div className="rounded-xl border border-slate-800 bg-[#4875b2] shadow-lg backdrop-blur-sm">
-          <form onSubmit={handleSubmit} className="p-6 space-y-5">
+        <div className="rounded-2xl border border-slate-200 bg-white shadow-xl">
+          <form onSubmit={handleSubmit} className="p-6 space-y-6">
             {success && (
-              <div className="rounded-md bg-emerald-900/30 text-emerald-200 border border-emerald-700 px-3 py-2">
+              <div className="rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-2">
                 {success}
               </div>
             )}
 
             <div>
-              <label className="block text-sm text-slate-300 mb-1">Title</label>
+              <label className={labelClasses}>Title</label>
               <input
                 name="title"
                 value={form.title}
                 onChange={handleChange}
                 type="text"
-                className="w-full rounded-md bg-white/90 text-black border border-slate-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-600"
+                className={inputClasses}
                 placeholder="Product title"
               />
               {errors.title && (
@@ -114,7 +144,7 @@ const AddProduct = ({ onAdd }) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-slate-300 mb-1">
+                <label className={labelClasses}>
                   Price
                 </label>
                 <input
@@ -123,7 +153,7 @@ const AddProduct = ({ onAdd }) => {
                   onChange={handleChange}
                   type="number"
                   step="0.01"
-                  className="w-full rounded-md bg-white/90 text-black border border-slate-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-600"
+                  className={inputClasses}
                   placeholder="0.00"
                 />
                 {errors.price && (
@@ -132,25 +162,83 @@ const AddProduct = ({ onAdd }) => {
               </div>
 
               <div>
-                <label className="block text-sm text-slate-300 mb-1">
+                <label className={labelClasses}>
                   Category
                 </label>
                 <select
                   name="category"
                   value={form.category}
                   onChange={handleChange}
-                  className="w-full rounded-md bg-white/90 text-black border border-slate-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-600"
+                  className={inputClasses}
                 >
-                  <option>Men</option>
-                  <option>Women</option>
-                  <option>Kids</option>
+                  <option value="">Select a category</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
-
+            {/* Audience (Men/Women/Kids) */}
+            <div>
+              <span className={labelClasses}>
+                Audience
+              </span>
+              <div className="flex items-center gap-3">
+                <label
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
+                    form.audience === "Men"
+                      ? "border-indigo-600 bg-indigo-50 text-indigo-700"
+                      : "border-slate-300 text-slate-700"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="audience"
+                    value="Men"
+                    checked={form.audience === "Men"}
+                    onChange={handleChange}
+                  />
+                  <span>Men</span>
+                </label>
+                <label
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
+                    form.audience === "Women"
+                      ? "border-indigo-600 bg-indigo-50 text-indigo-700"
+                      : "border-slate-300 text-slate-700"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="audience"
+                    value="Women"
+                    checked={form.audience === "Women"}
+                    onChange={handleChange}
+                  />
+                  <span>Women</span>
+                </label>
+                <label
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
+                    form.audience === "Kids"
+                      ? "border-indigo-600 bg-indigo-50 text-indigo-700"
+                      : "border-slate-300 text-slate-700"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="audience"
+                    value="Kids"
+                    checked={form.audience === "Kids"}
+                    onChange={handleChange}
+                  />
+                  <span>Kids</span>
+                </label>
+              </div>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-slate-300 mb-1">
+                <label className={labelClasses}>
                   Stock
                 </label>
                 <input
@@ -158,7 +246,7 @@ const AddProduct = ({ onAdd }) => {
                   value={form.stock}
                   onChange={handleChange}
                   type="number"
-                  className="w-full rounded-md bg-white/90 text-black border border-slate-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-600"
+                  className={inputClasses}
                   placeholder="0"
                 />
                 {errors.stock && (
@@ -167,7 +255,7 @@ const AddProduct = ({ onAdd }) => {
               </div>
 
               <div>
-                <label className="block text-sm text-slate-300 mb-1">
+                <label className={labelClasses}>
                   Rating (0–5)
                 </label>
                 <input
@@ -178,7 +266,7 @@ const AddProduct = ({ onAdd }) => {
                   step="0.1"
                   min="0"
                   max="5"
-                  className="w-full rounded-md bg-white/90 text-black border border-slate-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-600"
+                  className={inputClasses}
                   placeholder="Optional"
                 />
                 {errors.rating && (
@@ -188,21 +276,60 @@ const AddProduct = ({ onAdd }) => {
             </div>
 
             <div>
-              <label className="block text-sm text-slate-300 mb-1">
-                Image URL
+              <label className={labelClasses}>
+                Image 1 URL
               </label>
               <input
-                name="imageUrl"
-                value={form.imageUrl}
+                name="imageUrl1"
+                value={form.imageUrl1}
                 onChange={handleChange}
                 type="text"
-                className="w-full rounded-md bg-white/90 text-black border border-slate-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-600"
+                className={inputClasses}
+                placeholder="https://example.com/image.jpg"
+              />
+            </div>
+            <div>
+              <label className={labelClasses}>
+                Image 2 URL
+              </label>
+              <input
+                name="imageUrl2"
+                value={form.imageUrl2}
+                onChange={handleChange}
+                type="text"
+                className={inputClasses}
+                placeholder="https://example.com/image.jpg"
+              />
+            </div>
+            <div>
+              <label className={labelClasses}>
+                Image 3 URL
+              </label>
+              <input
+                name="imageUrl3"
+                value={form.imageUrl3}
+                onChange={handleChange}
+                type="text"
+                className={inputClasses}
+                placeholder="https://example.com/image.jpg"
+              />
+            </div>
+            <div>
+              <label className={labelClasses}>
+                Image 4 URL
+              </label>
+              <input
+                name="imageUrl4"
+                value={form.imageUrl4}
+                onChange={handleChange}
+                type="text"
+                className={inputClasses}
                 placeholder="https://example.com/image.jpg"
               />
             </div>
 
             <div>
-              <label className="block text-sm text-slate-300 mb-1">
+              <label className={labelClasses}>
                 Description
               </label>
               <textarea
@@ -210,7 +337,7 @@ const AddProduct = ({ onAdd }) => {
                 value={form.description}
                 onChange={handleChange}
                 rows={4}
-                className="w-full rounded-md bg-white/80 text-black border border-slate-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-600"
+                className={inputClasses}
                 placeholder="Enter Product Description"
               />
             </div>
@@ -218,21 +345,7 @@ const AddProduct = ({ onAdd }) => {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 rounded-md bg-[#0e2064] hover:bg-[#F139B1]/90 active:bg-[#F139B1]/80 px-4 py-2 text-white font-medium transition"
-                onClick={() => {
-                  if (form.category === "Men") {
-                    console.log("Men");
-                    onAdd(product);
-                  }
-                  else if(form.category === "Women"){
-                    console.log("Women");
-                    onAdd(product);
-                  }
-                  else if(form.category === "Kids"){
-                    console.log("Kids");
-                    onAdd(product);
-                  }
-                }}
+                className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-sky-600 hover:from-indigo-700 hover:to-sky-700 px-5 py-2.5 text-white font-medium shadow-sm transition"
               >
                 Add Product
               </button>

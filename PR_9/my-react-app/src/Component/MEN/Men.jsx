@@ -1,9 +1,8 @@
 import React from 'react'
+import AudienceProducts from "../Home/Audience/AudienceProducts";
 
 const Men = () => {
-  return (
-    <div>Men</div>
-  )
+  return <AudienceProducts audience="Men" />
 }
 
 export default Men
