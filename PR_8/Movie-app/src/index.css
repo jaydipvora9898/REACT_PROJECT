@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+  body {
+    /* Remove gradient stop utilities from @apply to fix Tailwind v4 error */
+    @apply text-slate-100 antialiased;
+  }
+}
+
+/* Tailwind v4: Global layer/ @apply હટાવો. Utilities component className માં વાપરો. */
+@tailwind utilities;

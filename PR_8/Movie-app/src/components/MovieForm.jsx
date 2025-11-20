@@ -10,6 +10,7 @@ export default function MovieForm({
     genre: "",
     year: "",
     rating: "",
+    price: "",
     posterUrl: "",
     description: "",
   });
@@ -21,6 +22,7 @@ export default function MovieForm({
         genre: initialData.genre || "",
         year: initialData.year || "",
         rating: initialData.rating ?? "",
+        price: initialData.price ?? "",
         posterUrl: initialData.posterUrl || "",
         description: initialData.description || "",
       });
@@ -40,6 +42,7 @@ export default function MovieForm({
       genre: form.genre.trim(),
       year: form.year ? Number(form.year) : undefined,
       rating: form.rating !== "" ? Number(form.rating) : undefined,
+      price: form.price !== "" ? Number(form.price) : undefined,
       posterUrl: form.posterUrl.trim(),
       description: form.description.trim(),
     };
@@ -96,6 +99,19 @@ export default function MovieForm({
             min="0"
             max="10"
             placeholder="8.8"
+            className="w-full rounded-md bg-slate-900 border border-slate-700 px-3 py-2 outline-none focus:border-indigo-500 transition"
+          />
+        </div>
+        <div>
+          <label className="block text-sm mb-1">Price (₹)</label>
+          <input
+            name="price"
+            value={form.price}
+            onChange={handleChange}
+            type="number"
+            step="0.01"
+            min="0"
+            placeholder="e.g., 199.00"
             className="w-full rounded-md bg-slate-900 border border-slate-700 px-3 py-2 outline-none focus:border-indigo-500 transition"
           />
         </div>
