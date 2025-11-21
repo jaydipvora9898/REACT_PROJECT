@@ -68,7 +68,7 @@ const Slider4 = () => {
                         key={product.id}
                         className="group relative overflow-hidden"
                       >
-                        <a href="#">
+                        <a href={product.href}>
                           <img
                             alt={`slide-${idx}-product-${product.id}`}
                             src={product.img}

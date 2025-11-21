@@ -1,17 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
+import { useSelector } from 'react-redux';
 
 const AudienceProducts = ({ audience }) => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("products") || "[]";
-      const parsed = JSON.parse(raw);
-      setProducts(Array.isArray(parsed) ? parsed : []);
-    } catch (e) {
-      setProducts([]);
-    }
-  }, []);
+  const products = useSelector((state) => state.products.items);
 
   const filtered = useMemo(
     () =>
@@ -41,12 +32,14 @@ const AudienceProducts = ({ audience }) => {
               >
                 <div className="aspect-[2/2.5] bg-slate-100">
                   {item.imageUrl1 ? (
-                    <img
-                      src={item.imageUrl1}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
+                    <a href={item.productUrl || "#"} target="_blank" rel="noopener noreferrer">
+                      <img
+                        src={item.imageUrl1}
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </a>
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200" />
                   )}

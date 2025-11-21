@@ -204,18 +204,20 @@ const Shop = () => {
   return (
     <>
       <section className="py-12 bg-white">
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-0 justify-items-center justify-center">
-          {shopData.map((product) => (
-            <div key={product.id} className="group relative overflow-hidden">
-              <a href={product.href}>
-                <img
-                  alt={product.name}
-                  src={product.img}
-                  className="aspect-square w-full bg-gray-200 object-cover h-[335px] transition-transform duration-300"
-                />
-              </a>
-            </div>
-          ))}
+        <div>
+          <div className="mt-6 flex flex-wrap justify-center">
+            {shopData.map((product) => (
+              <div key={product.id} className="group relative overflow-hidden w-1/2 sm:w-1/3 lg:w-1/6">
+                <a href={product.href}>
+                  <img
+                    alt={`shop-${product.id}`}
+                    src={product.img}
+                    className="aspect-square bg-gray-200 object-cover h-[331px] transition-transform duration-300"
+                  />
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>

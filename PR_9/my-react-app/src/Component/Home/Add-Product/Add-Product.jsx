@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../../store/productsSlice';
 
 const manCategories = [
   "Backpacks",
@@ -45,7 +47,7 @@ const womenCategories = [
   "Trunks",
   "Thermal Sets",
   "Other",
-]
+];
 const kidsCategories = [
   "Bodysuit",
   "Briefs",
@@ -99,7 +101,8 @@ const kidsCategories = [
   "Night suits",
   "Necklace and Chains",
   "Nightdress",
-  "Organisers","Pendant",
+  "Organisers",
+  "Pendant",
   "Plates",
   "Rompers",
   "Robe",
@@ -134,10 +137,11 @@ const kidsCategories = [
   "Waist Pouch",
   "Wallets",
   "Wall Shelves",
-  "Waistcoat"
-]
+  "Waistcoat",
+];
 const AddProduct = ({ onAdd }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     title: "",
     price: "",
@@ -190,7 +194,7 @@ const AddProduct = ({ onAdd }) => {
   // Ensure selected category always exists for current audience
   useEffect(() => {
     if (!categoriesForAudience.includes(form.category)) {
-      setForm((prev) => ({ ...prev, category: "Other" }));
+      setForm((prev) => ({ ...prev, category: "Select a Category" }));
     }
   }, [categoriesForAudience]);
 
@@ -216,8 +220,8 @@ const AddProduct = ({ onAdd }) => {
       createdAt: new Date().toISOString(),
     };
 
-    const existing = JSON.parse(localStorage.getItem("products") || "[]");
-    localStorage.setItem("products", JSON.stringify([product, ...existing]));
+    // Persist via Redux store (slice also syncs to localStorage)
+    dispatch(addProduct(product));
     if (typeof onAdd === "function") onAdd(product);
 
     const audiencePath = `/${(form.audience || "Men").toLowerCase()}`;
@@ -270,9 +274,9 @@ const AddProduct = ({ onAdd }) => {
             {/* Audience (Men/Women/Kids) */}
             <div>
               <span className={labelClasses}>Audience</span>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 justify-center sm:justify-start">
                 <label
-                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition cursor-pointer ${
                     form.audience === "Men"
                       ? "border-indigo-600 bg-indigo-50 text-indigo-700"
                       : "border-slate-300 text-slate-700"
@@ -288,7 +292,7 @@ const AddProduct = ({ onAdd }) => {
                   <span>Men</span>
                 </label>
                 <label
-                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition cursor-pointer ${
                     form.audience === "Women"
                       ? "border-indigo-600 bg-indigo-50 text-indigo-700"
                       : "border-slate-300 text-slate-700"
@@ -304,7 +308,7 @@ const AddProduct = ({ onAdd }) => {
                   <span>Women</span>
                 </label>
                 <label
-                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition cursor-pointer ${
                     form.audience === "Kids"
                       ? "border-indigo-600 bg-indigo-50 text-indigo-700"
                       : "border-slate-300 text-slate-700"
@@ -320,7 +324,7 @@ const AddProduct = ({ onAdd }) => {
                   <span>Kids</span>
                 </label>
                 <label
-                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition cursor-pointer ${
                     form.audience === "Home"
                       ? "border-indigo-600 bg-indigo-50 text-indigo-700"
                       : "border-slate-300 text-slate-700"
@@ -336,7 +340,7 @@ const AddProduct = ({ onAdd }) => {
                   <span>Home</span>
                 </label>
                 <label
-                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition cursor-pointer ${
                     form.audience === "Beauty"
                       ? "border-indigo-600 bg-indigo-50 text-indigo-700"
                       : "border-slate-300 text-slate-700"
@@ -352,7 +356,7 @@ const AddProduct = ({ onAdd }) => {
                   <span>Beauty</span>
                 </label>
                 <label
-                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition ${
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border transition cursor-pointer ${
                     form.audience === "Genz"
                       ? "border-indigo-600 bg-indigo-50 text-indigo-700"
                       : "border-slate-300 text-slate-700"
@@ -367,7 +371,6 @@ const AddProduct = ({ onAdd }) => {
                   />
                   <span>Genz</span>
                 </label>
-                
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
